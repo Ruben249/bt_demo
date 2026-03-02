@@ -26,14 +26,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-add_executable(ui_stub src/ui_stub.cpp)
-ament_target_dependencies(ui_stub
-  rclcpp rclcpp_action std_msgs
-  server_web_interfaces
-  nao_led_interfaces
-  nao_ui_utils
-)
-install(TARGETS ui_stub DESTINATION lib/${PROJECT_NAME})
 
 install(PROGRAMS
   scripts/opencv_eval_node.py
@@ -45,11 +37,6 @@ install(PROGRAMS
 install(DIRECTORY
   config/opencv_templates
   DESTINATION share/${PROJECT_NAME}/config
-)
-
-install(TARGETS
-  ui_stub
-  DESTINATION lib/${PROJECT_NAME}
 )
 
 
