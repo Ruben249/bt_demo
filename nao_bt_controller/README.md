@@ -8,7 +8,6 @@ This README provides a **high-level map**, **how to launch**, and **what must be
 - [What this package does](#what-this-package-does)
 - [Interfaces and dependencies](#interfaces-and-dependencies)
 - [Prerequisites](#prerequisites)
-- [Packages](#packages)
 - [Build](#build)
 - [Run](#run)
 - [Configuration](#configuration)
@@ -41,13 +40,6 @@ or fail at the corresponding tick.
 > **Platform note (Ubuntu 22.04):**
 > This package was developed and validated on **Ubuntu 22.04 (Jammy)** and **ROS 2 Rolling**.
 ---
-## Packages
-- [`nao_bt_controller/`](./nao_bt_controller) — **Behaviour Tree (BT) runner/controller**  
-  Orchestrates the overall HRI workflow by ticking the rest of the stack through ROS 2 interfaces (UI, speech, pose/evaluation, LEDs) and advancing the tree based on standardized results.
-
-- [`nao_hri_demo_nodes/`](./nao_hri_demo_nodes) — **Demo nodes and bridge scripts (stubs/bridges/evaluation)**  
-  Provides the “glue” nodes that expose the services/topics/actions consumed by the BT runner (e.g., speech bridge, pose bridge, evaluation node), so the orchestration can be validated end-to-end.
- ---
 ## Build
 From the workspace root:
 ```bash
