@@ -8,6 +8,7 @@ This README provides a **high-level map**, **how to launch**, and **what must be
 - [What this package does](#what-this-package-does)
 - [Interfaces and dependencies](#interfaces-and-dependencies)
 - [Prerequisites](#prerequisites)
+- [Packages](#packages)
 - [Build](#build)
 - [Run](#run)
 - [Configuration](#configuration)
@@ -40,6 +41,13 @@ or fail at the corresponding tick.
 > **Platform note (Ubuntu 22.04):**
 > This package was developed and validated on **Ubuntu 22.04 (Jammy)** and **ROS 2 Rolling**.
 ---
+## Packages
+- [`nao_bt_controller/`](./nao_bt_controller) — **Behaviour Tree (BT) runner/controller**  
+  Orchestrates the overall HRI workflow by ticking the rest of the stack through ROS 2 interfaces (UI, speech, pose/evaluation, LEDs) and advancing the tree based on standardized results.
+
+- [`nao_hri_demo_nodes/`](./nao_hri_demo_nodes) — **Demo nodes and bridge scripts (stubs/bridges/evaluation)**  
+  Provides the “glue” nodes that expose the services/topics/actions consumed by the BT runner (e.g., speech bridge, pose bridge, evaluation node), so the orchestration can be validated end-to-end.
+ ---
 ## Build
 From the workspace root:
 ```bash
@@ -57,9 +65,19 @@ python3 /bt_demo/nao_bt_controller/nao_bt_controller/bt_runner.py
 ```
 ---
 ## Configuration
-BT configuration (tree selection, parameters, and any scenario-specific values) is kept configuration-driven
-wherever possible so you can iterate on behaviours without changing core orchestration code.
-See the package sources and any configuration files referenced by your deployment setup.
+The BT runner is designed to be **configuration-driven**. In practice, this means the Behaviour Tree
+definition and its runtime parameters (e.g., selected scenario/state names, timeouts/holds, profile names,
+and any IDs used by the bridges) are provided via **package resources and/or runtime parameters** rather
+than being hardcoded in the orchestration logic.
+
+To adapt the behaviour to a new demo/scenario:
+- Locate the BT definition(s) and any associated configuration files shipped with this package (or referenced by it).
+- Adjust the parameters/IDs that the tree uses to “tick” the rest of the stack (topic/service/action names,
+  expected JSON keys, profile filenames, etc.), keeping them consistent with the nodes you are running.
+- Prefer changing configuration values over modifying the BT runner code, so you can iterate safely and
+  keep orchestration logic stable.
+If you are unsure what is configurable in your current version, start from the `bt_runner.py` entrypoint and
+follow the configuration loading/parameter declarations used at startup.
 ---
 ## Troubleshooting
 - **BT blocks on a step / never advances:**
