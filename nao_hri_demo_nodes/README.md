@@ -58,23 +58,53 @@ source install/setup.bash
 ```
 ---
 ## Run
-> Recommended order: bring up the bridge/demo nodes first, then launch the BT runner.
-### 1) Speech/TTS bridge
+> Recommended order: bring up the **backend servers** first (the ones these scripts connect to), then
+> launch the bridge/demo nodes from this package, and finally start the BT runner.
+### 0) Start required backend servers (must be running first)
+These scripts are **clients/bridges**: they only work correctly if the corresponding server-side nodes
+are already up (service/action/topic providers).
+Typical examples:
+- **Speech/TTS backend server**: provides the ROS 2 service that `speak_bridge.py` calls.
+- **LED action server**: provides the `leds_play` action if your flow uses LED profiles/actions.
+- **Any pose/execution server**: if your pose bridge forwards requests to another node.
+- **Any evaluation dependencies**: camera/streams or producers required by the evaluation pipeline.
+> If a required server is not running, the bridge will either block waiting, time out, or drop requests.
+> Use `ros2 node list`, `ros2 service list`, and `ros2 action list` to confirm providers exist.
+### 1) Speech/TTS bridge (`speak_bridge.py`)
 ```bash
 python3 ./src/thirdparty/bt_demo/nao_hri_demo_nodes/scripts/speak_bridge.py
 ```
-### 2) Pose bridge
+This node forwards high-level speak requests to an external **ROS 2 service provider**.
+In **my setup**, the service provider comes from the `simple_hri` stack (and may use Google TTS), but
+**in your setup it may be a different node/service** depending on the speech pipeline you use.
+- My provider: https://github.com/rodperex/simple_hri
+- If you use a different TTS node, update the bridge configuration or service name accordingly.
+### 2) Pose bridge (`nao_pos_bridge.py`)
 ```bash
 python3 ./src/thirdparty/bt_demo/nao_hri_demo_nodes/scripts/nao_pos_bridge.py
 ```
-### 3) Vision/evaluation node (MediaPipe/OpenCV)
+This node forwards pose/execution requests. Ensure any **pose server** it depends on is already running
+(if your deployment uses one), otherwise requests will not complete.
+### 3) Vision/evaluation node (`opencv_eval_node.py`)
 ```bash
 python3 ./src/thirdparty/bt_demo/nao_hri_demo_nodes/scripts/opencv_eval_node.py
 ```
+This node runs the evaluation loop (MediaPipe/OpenCV). Ensure that all runtime inputs it needs (camera,
+video source, templates under `config/opencv_templates/`, etc.) are available on your machine.
 > If you use a different workspace layout, adjust the script paths accordingly.
 > If these scripts are installed as ROS 2 executables in your environment, you can also run them via
 > `ros2 run <package> <executable>` (check with `ros2 pkg executables nao_hri_demo_nodes`).
----
+### Quick sanity checks (recommended)
+After launching each node, verify the graph:
+```bash
+ros2 node list
+ros2 node info <node_name>
+ros2 service list
+ros2 action list
+ros2 topic list
+```
+If something does not appear, you are either in the wrong environment (not sourced) or a required server
+is missing.
 ## How to verify and simulate a tick
 Because the BT runner calls into these nodes through ROS 2 interfaces, you can validate everything
 without the BT by following a three-step approach:
