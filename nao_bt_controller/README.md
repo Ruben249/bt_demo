@@ -63,8 +63,8 @@ and any IDs used by the bridges) are provided via **package resources and/or run
 than being hardcoded in the orchestration logic.
 > **Catalog path (required):**
 > The BT runner currently declares `catalog_path` with a **hardcoded absolute path** in `bt_runner.py` (around **line 722**):
-> `ros.declare_parameter("catalog_path", ".../config/exercises_catalog.yml")`.
-> You **must replace** that string with the absolute path to `exercises_catalog.yml` on your machine.
+> `ros.declare_parameter("PATH2WS", ".../config/exercises_catalog.yml")`.
+> You **must replace** <PATH2WS> with the absolute path to `exercises_catalog.yml` on your machine.
 >
 > Example: change it to something like:
 > `/home/<your_user>/<your_ws>/src/thirdparty/bt_demo/nao_hri_demo_nodes/nao_hri_demo_nodes/config/exercises_catalog.yml`
