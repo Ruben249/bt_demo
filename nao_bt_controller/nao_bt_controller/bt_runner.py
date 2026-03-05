@@ -719,7 +719,7 @@ def main():
 
     ros.declare_parameter(
         "catalog_path",
-        "/home/rubenb/uni/5_ano/1cuatri/tfg/ubunt22/nao_ws/src/thirdparty/bt_demo/nao_hri_demo_nodes/nao_hri_demo_nodes/config/exercises_catalog.yml",
+        "<PATH2WS>/nao_ws/src/thirdparty/bt_demo/nao_hri_demo_nodes/nao_hri_demo_nodes/config/exercises_catalog.yml",
     )
     ros.declare_parameter("pose_id", "rightarmUp")
     ros.declare_parameter("attempt_window_s", 6.0)
