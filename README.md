@@ -12,7 +12,7 @@ Each package is documented separately; this README provides a **high-level map**
 - [License](#license)
 ---
 ## What this repository does (and does not)
-This repository provides a **ROS 2 HRI demo stack for NAO**: a Behaviour Tree runner plus “glue” nodes that translate high-level BT commands into **ROS 2 services/actions** (web UI, speech/TTS, pose/evaluation, LEDs).
+This repository provides a **ROS 2 HRI demo stack.** It was tested on the NAO robot simulator: a Behaviour Tree runner plus “glue” nodes that translate high-level BT commands into **ROS 2 services/actions** (web UI, speech/TTS, pose/evaluation, LEDs).
 
 It **does** focus on integration, traceability, and configuration-driven behaviour so the scenario can be iterated without recompiling everything.
 It **does not** implement the full robot hardware stack end-to-end (drivers/simulation bringup are out of scope here and live elsewhere), nor does it provide a single monolithic launcher for every deployment.
