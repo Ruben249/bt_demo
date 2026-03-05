@@ -28,7 +28,7 @@ Provides the “glue” components that connect the BT to external subsystems: t
 - ROS 2 (Rolling) installed and sourced.
 - `colcon` and standard ROS 2 build tooling.
 - A working workspace (example name: `nao_ws`) with this repository placed under
-`src/`.
+`src/thirdparty`.
 > Any extra dependencies that are package-specific are documented in each package
 README.
 ---
