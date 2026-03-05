@@ -61,6 +61,15 @@ The BT runner is designed to be **configuration-driven**. In practice, this mean
 definition and its runtime parameters (e.g., selected scenario/state names, timeouts/holds, profile names,
 and any IDs used by the bridges) are provided via **package resources and/or runtime parameters** rather
 than being hardcoded in the orchestration logic.
+> **Catalog path (required):**
+> The BT runner currently declares `catalog_path` with a **hardcoded absolute path** in `bt_runner.py` (around **line 722**):
+> `ros.declare_parameter("catalog_path", ".../config/exercises_catalog.yml")`.
+> You **must replace** that string with the absolute path to `exercises_catalog.yml` on your machine.
+>
+> Example: change it to something like:
+> `/home/<your_user>/<your_ws>/src/thirdparty/bt_demo/nao_hri_demo_nodes/nao_hri_demo_nodes/config/exercises_catalog.yml`
+>
+> If you don’t update this path, the runner won’t be able to load the exercise catalog/configuration.
 
 To adapt the behaviour to a new demo/scenario:
 - Locate the BT definition(s) and any associated configuration files shipped with this package (or referenced by it).
