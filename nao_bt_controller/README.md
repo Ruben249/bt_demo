@@ -38,7 +38,7 @@ or fail at the corresponding tick.
 - `colcon` and standard ROS 2 build tooling.
 - The rest of the demo stack running (bridges/stubs/evaluation/LED/UI components that the BT ticks).
 > **Platform note (Ubuntu 22.04):**
-> This package was developed and validated on **Ubuntu 22.04 (Jammy)** and **ROS 2 Rolling**.
+> This package was developed and validated on **Ubuntu 22.04** and **ROS 2 Rolling**.
 ---
 ## Build
 From the workspace root:
