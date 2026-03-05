@@ -23,6 +23,7 @@ launched **before** starting the BT so that all expected interfaces are availabl
 - **Configuration assets** used by the nodes (e.g., exercise catalog, OpenCV templates).
 This package is integration-focused: it does not replace robot drivers/simulation bringup; it enables
 repeatable HRI scenarios by exposing stable ROS 2 interfaces that the BT can call.
+---
 ## Repository layout
 - `scripts/`
 - `speak_bridge.py` — Speech/TTS bridge. Receives a high-level “speak” request and delegates it
@@ -37,6 +38,7 @@ and publishes standardized evaluation outputs.
 - `config/`- Provides the necessary templates for opencv_eval_node.py.
 - `exercises_catalog.yml` — Catalog describing the available exercises/scenarios and their parameters.
 - `opencv_templates/` — Templates/resources used by the vision/evaluation node.
+---
 ## Prerequisites
 - ROS 2 (Rolling) installed and sourced.
 - `colcon` and standard ROS 2 build tooling.
@@ -91,9 +93,12 @@ python3 ./src/thirdparty/bt_demo/nao_hri_demo_nodes/scripts/opencv_eval_node.py
 ```
 This node runs the evaluation loop (MediaPipe/OpenCV). Ensure that all runtime inputs it needs (camera,
 video source, templates under `config/opencv_templates/`, etc.) are available on your machine.
-> If you use a different workspace layout, adjust the script paths accordingly.
-> If these scripts are installed as ROS 2 executables in your environment, you can also run them via
-> `ros2 run <package> <executable>` (check with `ros2 pkg executables nao_hri_demo_nodes`).
+If you use a different workspace layout, adjust the script paths accordingly.
+If these scripts are installed as ROS 2 executables in your environment, you can also run them via
+`ros2 run <package> <executable>` (check with `ros2 pkg executables nao_hri_demo_nodes`).
+> **Camera topic note:**  
+>The vision node subscribes to a configurable parameter called image_topic (default: /image_raw).
+>Change it either by editing opencv_eval_node.py (self.declare_parameter("image_topic", "...")) or, preferably, by overriding the parameter at launch (set image_topic:=/camera/image_raw, etc.).
 ### Quick sanity checks (recommended)
 After launching each node, verify the graph:
 ```bash
