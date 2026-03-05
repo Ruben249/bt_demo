@@ -40,7 +40,8 @@ colcon build
 source install/setup.bash
 ```
 ---
-## RunThere is no single “one command” launcher in this top-level README because execution
+## Run
+There is no single “one command” launcher in this top-level README because execution
 is typically split across multiple terminals (or tmux).
 Start with the package READMEs, in this order:
 1. `nao_hri_demo_nodes` (brings up bridges/stubs and demo nodes used by the BT)
