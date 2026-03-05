@@ -34,7 +34,7 @@ pose selection, start/stop), forwards them to the relevant subsystem, and report
 - `opencv_eval_node.py` — Vision/evaluation node. Uses **MediaPipe** for landmark extraction and
 OpenCV utilities for evaluation logic. Loads templates from `config/opencv_templates/` when needed,
 and publishes standardized evaluation outputs.
-- `config/`
+- `config/`- Provides the necessary templates for opencv_eval_node.py.
 - `exercises_catalog.yml` — Catalog describing the available exercises/scenarios and their parameters.
 - `opencv_templates/` — Templates/resources used by the vision/evaluation node.
 ## Prerequisites
@@ -109,7 +109,8 @@ is missing.
 Because the BT runner calls into these nodes through ROS 2 interfaces, you can validate everything
 without the BT by following a three-step approach:
 ### Step A — Confirm the nodes are running
-In a new terminal (with the workspace sourced):```bash
+In a new terminal (with the workspace sourced):
+```bash
 ros2 node list
 ```
 Then inspect each node:
