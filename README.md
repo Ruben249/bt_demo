@@ -48,7 +48,7 @@ Start with the package READMEs, in this order:
 2. `nao_bt_controller` (BT runner that drives the scenario once subsystems are up)
 ---
 > **Platform note (Ubuntu 22.04):**
-> These packages were developed and validated on **Ubuntu 22.04** and **ROS2 rolling**. They can be executed either **natively** on Ubuntu 22.04 or inside an **Ubuntu 22.04 Distrobox** container (recommended when isolating dependencies or
+> These packages were developed and validated on **Ubuntu 22.04** and **ROS2 rolling**. They can be executed either **natively** on Ubuntu 22.04 or inside an **Ubuntu 22.04 Distrobox** container (recommended when isolating dependencies)
 ## License
 See the repository license file (or the per-package `package.xml` metadata, if
 applicable).
